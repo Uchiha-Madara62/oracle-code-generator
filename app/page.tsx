@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle, XCircle, Code, Database } from "lucide-react"
+import TrueFocus from "@/components/ui/TrueFocus"
+import ASCIIText from "@/components/ui/FallingText"
 
 interface ValidationResult {
   isValid: boolean
@@ -25,7 +27,7 @@ interface ValidationResult {
 export default function OracleCodeGenerator() {
   const [serviceCode, setServiceCode] = useState("")
   const [shbg, setShbg] = useState("")
-  const [pocode, setPocode] = useState("")
+  const [pocode, setPocode] = useState(11022);
   const [recnational, setRecnational] = useState("")
   const [isPackageIncident, setIsPackageIncident] = useState("0")
   const [result, setResult] = useState<ValidationResult | null>(null)
@@ -106,7 +108,14 @@ export default function OracleCodeGenerator() {
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold text-gray-900 flex items-center justify-center gap-2">
             <Database className="h-8 w-8 text-blue-600" />
-            Oracle Code Generator
+            <TrueFocus
+              sentence="Oracle Code Generator"
+              manualMode={false}
+              blurAmount={5}
+              borderColor="red"
+              animationDuration={2}
+              pauseBetweenAnimations={1}
+            />
           </h1>
           <p className="text-gray-600">Tự động sinh mã và kiểm tra mã vận đơn Oracle</p>
         </div>
@@ -167,7 +176,7 @@ export default function OracleCodeGenerator() {
                 {mode === "validate" && (
                   <div className="space-y-2">
                     <Label htmlFor="shbg">
-                     Mã vận đơn (SHBG) <span className="text-red-500">*</span>
+                      Mã vận đơn (SHBG) <span className="text-red-500">*</span>
                     </Label>
                     <Input
                       id="shbg"

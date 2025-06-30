@@ -27,7 +27,7 @@ interface ValidationResult {
 export default function OracleCodeGenerator() {
   const [serviceCode, setServiceCode] = useState("")
   const [shbg, setShbg] = useState("")
-  const [pocode, setPocode] = useState(11022);
+  const [pocode, setPocode] = useState("11022");
   const [recnational, setRecnational] = useState("")
   const [isPackageIncident, setIsPackageIncident] = useState("0")
   const [result, setResult] = useState<ValidationResult | null>(null)
@@ -169,7 +169,6 @@ export default function OracleCodeGenerator() {
                     onChange={(e) => setServiceCode(e.target.value)}
                     placeholder="Chọn hoặc nhập mã dịch vụ"
                     className="mt-2"
-                    required
                   />
                 </div>
 

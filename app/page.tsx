@@ -164,12 +164,12 @@ export default function OracleCodeGenerator() {
                       ))}
                     </SelectContent>
                   </Select>
-                  <Input
+                  {/* <Input
                     id="serviceCode"
                     onChange={(e) => setServiceCode(e.target.value)}
                     placeholder="Chọn hoặc nhập mã dịch vụ"
                     className="mt-2"
-                  />
+                  /> */}
                 </div>
 
                 {mode === "validate" && (

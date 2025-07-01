@@ -9,9 +9,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, XCircle, Code, Database } from "lucide-react"
+import { CheckCircle, XCircle, Code, Database, Copy } from "lucide-react"
 import TrueFocus from "@/components/ui/TrueFocus"
-import ASCIIText from "@/components/ui/FallingText"
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/hooks/use-toast"
 
 interface ValidationResult {
   isValid: boolean
@@ -25,6 +26,7 @@ interface ValidationResult {
 }
 
 export default function OracleCodeGenerator() {
+  const { toast } = useToast()
   const [serviceCode, setServiceCode] = useState("")
   const [shbg, setShbg] = useState("")
   const [pocode, setPocode] = useState("11022");
@@ -104,6 +106,7 @@ export default function OracleCodeGenerator() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <Toaster />
       <div className="max-w-4xl mx-auto space-y-6">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold text-gray-900 flex items-center justify-center gap-2">
@@ -252,7 +255,21 @@ export default function OracleCodeGenerator() {
                   {result.generatedCode && (
                     <div className="space-y-2">
                       <Label>Mã được sinh:</Label>
-                      <div className="p-3 bg-gray-100 rounded-md font-mono text-lg">{result.generatedCode}</div>
+                      <div className="p-3 bg-gray-100 rounded-md font-mono text-lg flex items-center justify-between">
+                        <span>{result.generatedCode}</span>
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(result.generatedCode)
+                            toast({
+                              title: "Đã sao chép",
+                              description: "Mã đã được sao chép vào clipboard.",
+                            })
+                          }}
+                          className="ml-4 text-sm text-blue-600 hover:underline"
+                        >
+                          <Copy />
+                        </button>
+                      </div>
                     </div>
                   )}
 
